@@ -24,6 +24,13 @@ A comprehensive communication platform built for critical business school studen
 - Rich text editing capabilities
 - Document versioning
 
+### 📧 Newsletter
+- Public subscribe / unsubscribe with one-click unsubscribe links
+- Instructor dashboard to compose, edit, and manage newsletter issues
+- Send to all active subscribers with per-recipient delivery tracking
+- Pluggable mailer (logs to console by default; swap in a real provider)
+- Subscriber management with search and status filtering
+
 ### 👥 User Management
 - Student and Instructor roles
 - Secure authentication with JWT
@@ -114,6 +121,9 @@ npm run dev
 - **WikiPageVersion:** Wiki page version history
 - **Document:** Collaborative documents
 - **DocumentCollaborator:** Document collaboration relationships
+- **NewsletterSubscriber:** Newsletter subscriber with unsubscribe token
+- **Newsletter:** Newsletter issue (draft or sent)
+- **NewsletterDelivery:** Per-subscriber delivery status for a newsletter
 
 ## API Endpoints
 
@@ -141,6 +151,20 @@ npm run dev
 - `GET /api/documents/[id]` - Get document
 - `PUT /api/documents/[id]` - Update document
 - `DELETE /api/documents/[id]` - Delete document
+
+### Newsletter
+- `POST /api/newsletter/subscribe` - Subscribe an email (public)
+- `GET|POST /api/newsletter/unsubscribe` - Unsubscribe via token (public)
+- `GET /api/newsletter/subscribers` - List subscribers (instructor)
+- `GET /api/newsletter` - List newsletters (instructor)
+- `POST /api/newsletter` - Create a draft newsletter (instructor)
+- `GET /api/newsletter/[id]` - Get a newsletter with delivery stats (instructor)
+- `PUT /api/newsletter/[id]` - Edit a draft newsletter (instructor)
+- `DELETE /api/newsletter/[id]` - Delete a newsletter (instructor)
+- `POST /api/newsletter/[id]/send` - Send to all active subscribers (instructor)
+
+Public pages live at `/newsletter/subscribe` and `/newsletter/unsubscribe`.
+Real email delivery can be enabled by implementing a transport in `lib/mailer.ts`.
 
 ## Development
 

@@ -82,6 +82,12 @@ export default function DashboardLayout({
             ✍️ Documents
           </Link>
           <Link
+            href="/dashboard/newsletter"
+            className="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition"
+          >
+            📧 Newsletter
+          </Link>
+          <Link
             href="/dashboard/profile"
             className="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition"
           >

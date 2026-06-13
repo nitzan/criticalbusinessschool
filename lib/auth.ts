@@ -24,6 +24,24 @@ export async function getAuthUser(request: NextRequest): Promise<AuthPayload | n
   }
 }
 
+/**
+ * Resolves the authenticated user and verifies they have the INSTRUCTOR role.
+ * Returns the user record on success, or null if unauthenticated / not allowed.
+ */
+export async function getInstructorUser(request: NextRequest) {
+  const payload = await getAuthUser(request);
+  if (!payload) {
+    return null;
+  }
+
+  const user = await getUserById(payload.userId);
+  if (!user || user.role !== 'INSTRUCTOR') {
+    return null;
+  }
+
+  return user;
+}
+
 export async function getUserById(userId: string) {
   return prisma.user.findUnique({
     where: { id: userId },
